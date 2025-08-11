@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - POSYANDU DESA MIJEN </title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tambahkan style khusus dari about_page -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <style>
+         .about-hero {
+            background: linear-gradient(135deg, #4a90a4 0%, #66BB6A 50%, #4CAF50 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 30%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(-5deg); }
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .section-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4a90a4, #66BB6A, #4CAF50);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90a4, #4CAF50);
+            border-radius: 2px;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, rgba(74, 144, 164, 0.1), rgba(255, 255, 255, 0.9));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(74, 144, 164, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(74, 144, 164, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .team-member:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50px, 50px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(74, 144, 164, 0.2);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a90a4, #66BB6A);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .member-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        }
+
+        .team-member:hover .member-avatar {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .member-role {
+            color: #4a90a4;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .member-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .thanks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .thanks-item {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(255, 255, 255, 0.9));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid #4CAF50;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thanks-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .thanks-item:hover::before {
+            left: 100%;
+        }
+
+        .thanks-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.2);
+        }
+
+        .thanks-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .thanks-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90a4, #4CAF50);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .contact-link {
+            color: #4a90a4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 3rem 1rem;
+                min-height: 50vh;
+            }
+
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .team-grid, .thanks-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0; /* tambahkan ini agar menu penuh */
+            align-items: center; /* ini yang bikin center */
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+            animation: slideDown 0.3s ease;
+        }
+
+        .mobile-nav.active {
+        display: flex;
+        }
+
+        .mobile-nav li {
+        list-style: none;
+        width: 90%;
+        }
+
+        .mobile-nav li a {
+        display: block;
+        background: linear-gradient(135deg, #4a90a4, #4CAF50);
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        color: white; /* Hijau khas POSYANDU DESA MIJEN */
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: 1px solid #c8e6c9;
+        }
+
+        .mobile-nav li a:hover {
+        background-color: #f1f8e9;
+        transform: scale(1.03);
+        }
+
+        @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        @media (max-width: 768px) {
+        /* TAMPIL DI MOBILE */
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            padding: 1rem;
+            
+        }
+
+        .desktop-only {
+            display: none;
+        }
+        }
+
+        .nav-menu {
+        display: none;
+        }
+
+        .nav-menu.show {
+        display: flex;
+        }
+
+        .hamburger {
+        display: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: black;
+        position: absolute;
+        right: 1rem;
+        top: 0.7rem;
+        z-index: 101;
+        }
+
+        @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        .desktop-only {
+            display: none;
+        }
+
+            .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background: white;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            z-index: 100;
+            }
+
+            .mobile-nav.active {
+            display: flex;
+            }
+
+        .mobile-nav li a {
+            color: #ffffff;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        }
+
+        .nav-menu.mobile-nav {
+        padding: 10px 15px;
+        }
+
+        .nav-menu.mobile-nav li {
+        list-style: none;
+        margin-bottom: 10px;
+        }
+
+        /* === DROPDOWN MOBILE STYLING YANG LEMBUT === */
+        .has-dropdown-mobile > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        transition: background 0.3s ease;
+        }
+
+        .has-dropdown-mobile > a:hover {
+        background-color: #f0f0f0;
+        }
+
+        /* Dropdown animasi lembut */
+        .dropdown-mobile {
+        max-height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        padding-left: 10px;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        opacity: 0;
+        margin-left: 16px;
+        }
+
+        .has-dropdown-mobile.active .dropdown-mobile {
+        max-height: 1000px; /* cukup besar untuk semua item */
+        opacity: 1;
+        }
+
+        .dropdown-mobile li a {
+        margin-top: 8px;
+        background-color: #f9f9f9;
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 15px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        }
+
+        .dropdown-mobile li a:hover {
+        background-color: #eaeaea;
+        transform: translateX(4px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar tetap from about.html -->
+    <nav class="navbar loading">
+        <div class="logo">POSYANDU DESA</div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <a href="index.html" class="back-button-mobile">←</a>
+
+        <ul class="nav-links desktop-only">
+            <li class="nav-item"><a href="index.html" class="active">Beranda</a></li>
+            <li class="nav-item has-dropdown">
+            <a href="#">Materi</a>
+            <div class="dropdown">
+                <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
+                <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
+                <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🧼 Kebersihan dan Mandi</a>
+                <a href="Pola_tidur.html" class="dropdown-item">🌙 Pola Tidur</a>
+                <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">👣 Perkembangan Motorik</a>
+                <a href="imunisasi.html" class="dropdown-item">💉 Kesehatan dan Imunisasi</a>
+                <a href="Keamanan_bayi.html" class="dropdown-item">🛡️ Keamanan Bayi</a>
+            </div>
+            </li>
+        </ul>
+
+        <!-- ✅ Taruh mobile-nav DI DALAM <nav> -->
+        <ul class="nav-menu mobile-nav" id="navMenu">
+            <li class="has-dropdown-mobile">
+            <a href="#">Materi</a>
+            <ul class="dropdown-mobile">
+                <li><a href="kehamilan.html">📱 Kehamilan</a></li>
+                <li><a href="asi.html">🍼 Pemberian ASI</a></li>
+                <li><a href="Kebersihan_dan_mandi_bayi.html">🧼 Kebersihan & Mandi</a></li>
+                <li><a href="Pola_tidur.html">🌙 Pola Tidur</a></li>
+                <li><a href="Perkembangan_motorik_bayi.html">👣 Motorik</a></li>
+                <li><a href="imunisasi.html">💉 Imunisasi</a></li>
+                <li><a href="Keamanan_bayi.html">🛡️ Keamanan Bayi</a></li>
+        </nav>
+
+    <!-- Hero Section -->
+    <header class="about-hero">
+        <div class="floating-icon">👶</div>
+        <div class="floating-icon">🤱</div>
+        <div class="floating-icon">💝</div>
+        <div class="floating-icon">🌟</div>
+
+        <div class="about-hero-content">
+            <h1>Tentang POSYANDU DESA MIJEN</h1>
+            <p>Platform edukasi yang hadir sebagai sahabat setia para ibu, membantu menavigasi setiap fase kehamilan hingga tumbuh kembang anak dengan penuh cinta, kepastian, dan informasi yang terpercaya.</p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content-section">
+        <!-- Deskripsi -->
+        <div class="section-card">
+            <h2 class="section-title">Tentang Kami</h2>
+            <p class="description-text">
+                POSYANDU DESA MIJEN adalah teman digital terpercaya yang hadir untuk mendampingi setiap langkah perjalanan seorang ibu, dari masa kehamilan hingga buah hati tumbuh berkembang.
+                <br><br>
+                Kami memahami bahwa menjadi ibu bukan hanya tentang merawat, tetapi juga tentang belajar, beradaptasi, dan mencintai tanpa batas. Di tengah banyaknya informasi yang bertebaran, POSYANDU DESA MIJEN hadir sebagai pelita — memberikan panduan yang jelas, akurat, dan sesuai dengan budaya serta kebutuhan ibu di Indonesia.
+                Lewat tampilan yang bersahabat dan isi yang mudah dipahami, POSYANDU DESA MIJEN ingin menjadi sahabat terbaik ibu, kapan pun dan di mana pun.
+            </p>
+        </div>
+
+        <!-- Kenapa Membuat POSYANDU DESA MIJEN -->
+        <div class="section-card">
+            <h2 class="section-title">💡 Mengapa POSYANDU DESA MIJEN?</h2>
+            <p class="description-text">
+                Kami percaya bahwa setiap ibu berhak mendapatkan informasi yang tepat dan dukungan yang mereka butuhkan. Dalam era digital ini, banyak informasi yang tersebar di internet, namun tidak semuanya dapat dipercaya atau sesuai dengan kondisi di Indonesia.
+                <br><br>
+                POSYANDU DESA MIJEN hadir untuk menjawab kebutuhan akan sumber informasi yang:
+                <br>
+                ✨ <strong>Terpercaya</strong> - Disusun berdasarkan penelitian dan panduan medis terkini
+                <br>
+                ✨ <strong>Mudah Diakses</strong> - Dapat digunakan kapan saja dan dimana saja
+                <br>
+                ✨ <strong>Sesuai Konteks</strong> - Disesuaikan dengan budaya dan kondisi Indonesia
+                <br>
+                ✨ <strong>Komprehensif</strong> - Mulai dari kehamilan hingga tumbuh kembang anak
+            </p>
+        </div>
+
+        <!-- Tim Developer -->
+        <div class="section-card">
+            <h2 class="section-title">Tim Pembuat </h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                         <img src="assets/rafi.jpeg" alt="Berliano Bagas Rafikansa" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">Berliano Bagas Rafikansa</h3>
+                    <p class="member-role">Front-End Developer</p>
+                    <p class="member-description">
+                       Bertanggung jawab dalam membangun tampilan antarmuka aplikasi yang responsif, ramah pengguna, dan optimal di berbagai perangkat. Memastikan pengguna dapat mengakses informasi dengan mudah dan nyaman.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                         <img src="assets/cinta.jpeg" alt=" Eka Cinta Ayu Safitri" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">Eka Cinta Ayu Safitri</h3>
+                    <p class="member-role">UI/UX Designer</p>
+                    <p class="member-description">
+                        Merancang pengalaman dan antarmuka pengguna yang intuitif serta menarik secara visual. Fokus pada kenyamanan dan kebutuhan pengguna dalam setiap elemen desain.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                         <img src="assets/syahrul.jpeg" alt=" M.Syahrul Azhar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">M.Syahrul Azhar</h3>
+                    <p class="member-role">Quality Assurance & Tester</p>
+                    <p class="member-description">
+                        Mengawasi kualitas aplikasi melalui pengujian fungsional dan usability. Bertugas mendeteksi dan melaporkan bug serta memastikan setiap fitur berjalan sesuai harapan sebelum dirilis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thanks To -->
+        <div class="section-card">
+            <h2 class="section-title">🙏 Terima Kasih Kepada</h2>
+            <div class="thanks-grid">
+                <div class="thanks-item">
+                    <span class="thanks-icon">👩‍⚕️</span>
+                    <div class="thanks-title">Tenaga Medis</div>
+                    <p>Para dokter, bidan, dan perawat yang telah memberikan panduan dan verifikasi medis</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">👥</span>
+                    <div class="thanks-title">Komunitas Ibu</div>
+                    <p>Para ibu yang telah berbagi pengalaman dan memberikan feedback untuk pengembangan platform</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">📚</span>
+                    <div class="thanks-title">Sumber Referensi</div>
+                    <p>Buku KIA (Kesehatan Ibu dan Anak) yang menjadi acuan utama dalam penyusunan konten medis dan edukatif di platform ini</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">👨‍👩‍👧‍👦</span>
+                    <div class="thanks-title">Keluarga & Teman</div>
+                    <p>Dukungan moral dan motivasi dari keluarga dan teman-teman terdekat</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">🌟</span>
+                    <div class="thanks-title">Para Pengguna</div>
+                    <p>Setiap ibu yang mempercayai POSYANDU DESA MIJEN sebagai panduan dalam perjalanan keibuan mereka</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontak -->
+        <div class="section-card contact-section">
+            <h2 class="section-title">📞 Hubungi Kami</h2>
+            <p class="description-text">
+                Kami senang mendengar dari Anda! Jika ada pertanyaan, saran, atau feedback, jangan ragu untuk menghubungi kami.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                    <img src="assets/mail.png" alt="Email"  style="width: 40px; height: 40px;" />
+                    </div>
+                    <h3 class="contact-title">Email</h3>
+                    <p class="contact-info">
+                        <a href="mailto:posyandumijen.app@gmail.com" class="contact-link">posyandumijen.app@gmail.com</a><br><small>Respon dalam 24 jam</small>
+                    </p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                    <img src="assets/ig.png" alt="Instagram"  style="width: 40px; height: 40px;" />
+                    </div>
+                    <h3 class="contact-title">Media Sosial</h3>
+                    <p class="contact-info">
+                        <a href="https://www.instagram.com/.id/" class="contact-link">@posyandumijen</a><br><small>Instagram</small>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                    <img src="assets/loc.png" alt="Lokasi"  style="width: 40px; height: 40px;" />
+                    </div>
+                    <h3 class="contact-title">Alamat</h3>
+                    <p class="contact-info">
+                        Desa Mijen, Kecamatan Kaliwungu, Kabupaten Kudus, Indonesia<br><small>Online Support</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animasi fade-in konten saat scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        });
+
+        // ✅ DROPDOWN MOBILE MENU ("Materi")
+        const dropdownToggles = document.querySelectorAll('.has-dropdown-mobile > a');
+        dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('active');
+        });
+        });
+    </script>
+</body>
+
+</html>
